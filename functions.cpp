@@ -76,3 +76,30 @@ void mainMenu ()
 		
 	}
 }
+
+
+void List::readIn ()
+{
+	ifstream infile;
+	string filename, information;
+
+	cout << "Please enter the file name to enter here:" << endl;
+	cin >> filename;
+
+	infile.open (filename, std::ios::in);
+	
+	while (!infile.eof)
+	{
+		infile >> information;//Idk if this will work still thinking of soemthing to do here. 
+		/*
+		pHead->StudentNumber = getNum (information); //1
+		pHead->name = getName (information); //2
+		pHead->idNumber = getId (information); //3
+		pHead->email = getEmail (information); // 4
+		pHead->units = getUnits (information); // 5
+		pHead->major = getMajor (information); // 6
+		pHead->grade = getGrade (information); //7
+		pHead->pNext = nullptr; 
+		*/
+	}	
+}

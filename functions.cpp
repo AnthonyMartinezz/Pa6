@@ -4,7 +4,7 @@
 //Detailed information for petris
 void mainMenu ()
 {
-	string mainMenu[5] = {"Menu","Import Records","Mark Absences","Generate Report", "Exit"};
+	string mainMenu[4] = {"Import Records","Mark Absences","Generate Report", "Exit"};
 	int points = 0, index = 0;
 
 	while(true)//Run while no input..
@@ -13,7 +13,7 @@ void mainMenu ()
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);//High light the text below with color 15
 		cout << "Main Menu" << endl;// This is now highlighted color 15 because of SetConsoleTextAttribute
 
-		for (index = 0; index < 5; index++)
+		for (index = 0; index < 4; index++)
 		{
 			if (index == points)
 			{
@@ -33,14 +33,14 @@ void mainMenu ()
 				points = points - 1;// Move down a line segment
 				if (points == -1)
 				{
-					points = 4;//Move back to top of lists.. and set highlight the top text once again..
+					points = 3;//Move back to top of lists.. and set highlight the top text once again..
 				}
 				break;//Send to top of loop clear screen and print with new thing selected
 			}
 			else if (GetAsyncKeyState(VK_DOWN) != 0)// get down arrow key input
 			{
 				points = points +1;//Move up a line segment
-				if (points == 5)// max option
+				if (points == 4)// max option
 				{
 					points = 0;// Overlapped botten and set points to 0 to highlight mainmenu[0] to highlight again .. 
 				}
@@ -50,27 +50,22 @@ void mainMenu ()
 			{
 				switch (points)//Test the case you want.. select option
 				{
-				case 0:// points == 0 // OPTION 0 MENU no use yet?
-					system ("cls");
-					cout << "Option MENU" <<endl;
-					system ("pause");
-					break;
-				case 1:// points == 1 // Import Recordes
+				case 0:// points == 0 // Import Recordes
 					system ("cls");
 					cout << "Option IMPORT RECORDS" <<endl;
 					system ("pause");
 					break;
-				case 2:// points == 2 // MARK abscenses
+				case 1:// points == 1 // MARK abscenses
 					system ("cls");
 					cout << "Option MAKE ABSCENSES" <<endl;
 					system ("pause");
 					break;
-				case 3:// points == 3// Generate Report
+				case 2:// points == 2// Generate Report
 					system ("cls");
 					cout << "Option GENERATE REPORT" <<endl;
 					system ("pause");
 					break;
-				case 4:// points == 4 // EXIT
+				case 3:// points == 3 // EXIT
 					return;
 					break;
 

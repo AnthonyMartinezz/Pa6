@@ -77,6 +77,7 @@ void mainMenu ()
 				}
 			}
 		}
-		Sleep (150);
+		Sleep (150);// Sleep is like system ("pause"); but in the sense it lets the program have time to read the input 
+		
 	}
 }

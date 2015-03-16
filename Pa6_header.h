@@ -10,7 +10,10 @@ using namespace std;
 class ListNode
 {
   friend class List;
+  friend void readIn ();
 public:
+	ListNode (string studentNumber, string id, string name, string email, string units, string prgram, string level);
+	ListNode (ListNode &object);
 
 private:
 string studentNumber;	
@@ -30,7 +33,7 @@ class List
 public:
 
 void readIn ();
-
+ListNode *makeNode (string studentNum, string idNum, string name, string email, string unit, string program, string level);
 private:
 ListNode *pHead;
 };

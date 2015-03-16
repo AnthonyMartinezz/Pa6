@@ -37,3 +37,11 @@ ListNode *pHead;
 
 
 void mainMenu ();
+string studentNumber (string information); // 1
+string getId (string information); // 2
+string getName (string information);
+string getEmail (string information);// 3
+string getUnits (string information);// 4
+
+string getProgram (string information);// 6
+string getlevel (string information);// 5

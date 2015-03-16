@@ -87,19 +87,210 @@ void List::readIn ()
 	cin >> filename;
 
 	infile.open (filename, std::ios::in);
+	infile >> information;
 	
-	while (!infile.eof)
+	while (!infile.eof ())
 	{
-		infile >> information;//Idk if this will work still thinking of soemthing to do here. 
-		/*
-		pHead->StudentNumber = getNum (information); //1
-		pHead->name = getName (information); //2
-		pHead->idNumber = getId (information); //3
-		pHead->email = getEmail (information); // 4
-		pHead->units = getUnits (information); // 5
-		pHead->major = getMajor (information); // 6
-		pHead->grade = getGrade (information); //7
-		pHead->pNext = nullptr; 
-		*/
-	}	
+
+		pMem = NULL;
+		pCur = NULL;
+
+		information.clear();
+		infile >> information;
+
+
+		//NEED MAKE NODE
+		//makeNode (name,idNum,email,units);
+		name = getName (information); //2
+		idNum = getId (information); //3
+		email = getEmail (information); // 4
+		units = getUnits (information); // 5
+		program = getProgram (information); // 6
+		level = getlevel (information); //7
+		studentNum = studentNumber (information);
+
+		pMem = makeNode (studentNum, idNum, name, email, units, program, level);
+		name.clear();
+		idNum.clear ();
+		email.clear ();
+		units.clear ();
+		program.clear ();
+		level.clear ();
+		studentNum.clear ();
+		//pHead->pNext = nullptr; 
+
+	}
+}
+
+
+ListNode *List::makeNode (string studentNum, string idNum, string name, string email, string unit, string program, string level)
+{
+	ListNode *pMem = NULL;
+
+	pMem = new ListNode (studentNum, idNum, name, email, unit, program, level);//,idNum,name,email,unit,program,level);
+	pMem->pNext = NULL;
+	return pMem;
+}
+
+ListNode::ListNode (string studentNumber, string id, string name, string email, string units, string prgram, string level)
+{
+	this->studentNumber = studentNumber;
+	this->idNumber = id;
+	this->name = name;
+	this->email = email;
+	this->units = units;
+	this->major = prgram;
+	this->grade = level;
+	//this->pNext = NULL;
+}
+
+
+
+string studentNumber (string information) // 1
+{
+	char valuedInfo[10];
+	//string valuedInfo;
+	int index = 0;
+
+
+
+	do
+	{
+
+
+		valuedInfo[index] = information[index];
+		//strcpy(valuedInfo[index],information[index]);
+		index++;
+	}while(information[index] != ',');
+
+	valuedInfo[index] = '\0';
+	return valuedInfo;
+}
+string getId (string information) // 2
+{
+	int index = 0, index2 = 0;
+	char valuedInfo[10];
+
+	for (index = 0;information[index] != ',';index++);
+	//index = 0;
+	index++;
+	do
+	{
+		valuedInfo[index2] = information[index];
+		index2++;
+		index++;
+	}while (information[index] != ',');
+
+	valuedInfo[index2] = '\0';
+	return valuedInfo;
+}
+string getName (string information)
+{
+	//2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+	int index1 = 0, index2 = 0;
+	char valuedInfo[20];
+
+	for (index1 = 0;information[index1] != '"'; index1++);
+	index1++;
+	do
+	{
+
+		valuedInfo[index2] = information[index1];
+		index2++;
+		index1++;
+	}while (information[index1] != '"');
+
+	valuedInfo[index2] = '\0';
+
+	return valuedInfo;
+}
+string getEmail (string information)// 3
+{
+	//2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+	char valuedInfo[40];
+	int index = 0, index2 = 0;
+	//char trash;
+
+	for(index = 0;information[index] != '"'; index++);
+	index++;
+	for(index;information[index] != '"'; index++);
+	index = index+2;
+	do
+	{
+		valuedInfo[index2] = information[index];
+		index2++;
+		index++;
+	}while (information [index] != ',');
+
+	valuedInfo[index2] = '\0';
+
+	return valuedInfo;
+}
+string getUnits (string information)// 4
+{
+	//2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+	char valuedInfo[50];
+	int index = 0, index2 = 0;
+
+	for (index = 0; information[index] != '@'; index++);
+	for (index; information[index] != ','; index++);
+	index++;
+	do
+	{
+		valuedInfo[index2] = information[index];
+		index2 ++;
+		index++;
+	}while (information[index] != ',');
+
+	valuedInfo[index2] = '\0'; 
+	return valuedInfo;
+}
+
+string getProgram (string information)// 6
+{
+	//2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+	char valuedInfo[40];
+	int index = 0, index2 = 0;
+
+	for (index = 0; information[index] != '@'; index++);
+	for (index; information[index] != ','; index++);
+	index++;
+	for (index; information[index] != ','; index++);
+	index++;
+
+	do
+	{
+		valuedInfo[index2] = information[index];
+		index2++;
+		index++;
+	}while (information[index] != ',');
+
+	valuedInfo[index2] = '\0';
+
+	return valuedInfo;
+}
+string getlevel (string information)// 5
+{
+	//2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+	char valuedInfo[30];
+	int index = 0, index2 = 0;
+
+	for (index = 0; information[index] != '@'; index++);
+	for (index; information[index] != ','; index++);
+	index++;
+	for (index; information[index] != ','; index++);
+	index++;
+	for (index; information[index] != ','; index++);
+	index++;
+
+	do
+	{
+		valuedInfo[index2] = information[index];
+		index2++;
+		index++;
+	}while (information[index] != '\0');
+
+	valuedInfo[index2] = '\0';
+
+	return valuedInfo;
 }
